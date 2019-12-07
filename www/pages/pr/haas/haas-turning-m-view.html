@@ -1,0 +1,38 @@
+<template>
+    <div class="page" data-name="gcode">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+                </div>
+                <div class="title">{{mcode.title}}</div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title"><b>{{mcode.title}}</b></div>
+            <div class="block block-strong">
+                {{mcode.description}}
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+return {
+    data: function() {
+        var mcodeId = this.$route.params.id;
+        console.log(mcodeId);
+        var currentMcode;
+        HAAS_TURNING_M.forEach(function(mcode) {
+            if (mcode.title === mcodeId) {
+                currentMcode = mcode;
+            }
+        });
+        return {
+            mcode: currentMcode,
+        };
+    }
+};
+</script>

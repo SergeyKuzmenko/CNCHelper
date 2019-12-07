@@ -1,0 +1,82 @@
+<template>
+    <div class="page" data-name="sinumerik">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="link back" href="/">
+                        <i class="icon icon-back"></i>
+                        <span class="ios-only">Назад</span>
+                    </a>
+                </div>
+                <div class="title">Sinumerik</div>
+                <div class="right"></div>
+            </div>
+        </div>
+        <!--- <div class="searchbar-backdrop"></div>
+        <form class="searchbar searchbar-init" data-search-container=".list" data-search-in=".item-title"
+              data-search-item="li">
+            <div class="searchbar-inner">
+                <div class="searchbar-input-wrap">
+                    <input placeholder="Поиск..." type="search">
+                    <i class="searchbar-icon"></i>
+                    <span class="input-clear-button"></span>
+                </div>
+                <span class="searchbar-disable-button">Отмена</span>
+            </div>
+        </form> --->
+        <div class="page-content">
+            <div class="block content block-strong" style="justify-content: center;">
+                <div class="preloader"></div>
+                <!--<div class="list links-list searchbar-found">-->
+                    <!--<ul>-->
+                        <!--{{#each data}}-->
+                        <!--<li class="item-title">-->
+                            <!--<a class="item-title" href="/sinumerik/all/{{id}}/">-->
+                                <!--<div class="item-inner">-->
+                                    <!--<div class="item-title"><span class="item-title-bold">{{title}}</span> —-->
+                                        <!--{{description}}-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--{{/each}}-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="block searchbar-not-found">-->
+                    <!--<div class="block-inner">Ничего не найдено</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    //noinspection JSAnnotator
+    return {
+        data: function () {
+            return {
+                url: './data/pr/sinumerik/sinumerik.json',
+                dbSize: 5 * 1024 * 1024, // 5MB
+                data: []
+            }
+        },
+        methods: {
+
+        },
+        on: {
+            pageInit: function () {
+
+            }
+        }
+    }
+        ;
+</script>
+<style>
+    .item-title-bold {
+        font-weight: bold;
+    }
+
+    .preloader {
+        margin-right: 10px;
+    }
+</style>

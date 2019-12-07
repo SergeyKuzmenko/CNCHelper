@@ -1,0 +1,215 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="link back" href="#">
+                        <i class="icon icon-back"></i>
+                        <span class="ios-only">Назад</span>
+                    </a>
+                </div>
+                <div class="title">Debug</div>
+                <div class="right">
+                    <a class="link popover-open" data-popover=".popover-debug-adv" href="#"><i class="f7-icons">ellipsis_vertical</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="popover popover-debug-adv">
+            <div class="popover-inner">
+                <div class="list links-list">
+                    <ul>
+                        <li>
+                            <a class="panel-close" href="/log/"
+                               onclick="app.popover.close();"
+                            >
+                                <div class="item-media">
+                                    <i class="f7-icons">list_bullet</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">See Log</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title">Actions</div>
+            <div class="block">
+                <div class="list">
+                    <ul>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Logger</div>
+                                <div class="item-after">
+                                    <label @click="loggerTogle" class="toggle toggle-init color-green"
+                                           id="toggle-logger">
+                                        <input data-name="logger" type="checkbox">
+                                        <span class="toggle-icon"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Clear database <i class="f7-icons tooltip-init" data-tooltip="Crashes the application. Need restart app." style="font-size: 16px">exclamationmark_triangle</i></div>
+                                <div class="item-after">
+                                    <button class="button button-raised button-small color-red" id="buttonClearDB" @click="clearDB">Clear</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block-title">System Informations</div>
+            <div class="block">
+                <div class="list">
+                    <ul>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Manufacturer</div>
+                                <div class="item-after"><b>{{manufacturer}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Model</div>
+                                <div class="item-after"><b>{{model}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Platform</div>
+                                <div class="item-after"><b>{{platform}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Version</div>
+                                <div class="item-after"><b>{{version}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">isVirtual</div>
+                                <div class="item-after"><b>{{isVirtual}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">UUID</div>
+                                <div class="item-after"><b>{{uuid}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Serial</div>
+                                <div class="item-after"><b>{{serial}}</b></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Cordova</div>
+                                <div class="item-after"><b>{{cordova}}</b></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block-title">Router</div>
+            <div class="block">
+                <div class="list">
+                    <ul>
+                        <li>
+                            <div class="item-inner">
+                                <div class="item-title">Routes (pc)</div>
+                                <div class="item-after"><b>{{router_length}}</b></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block-title">Database</div>
+            <div class="block">
+                <div class="list">
+                    {{#each database}}
+                    <div class="list-group">
+                        <ul>
+                            <li class="list-group-title">Table: {{@key}}</li>
+                            {{#each this}}
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">{{@key}}</div>
+                                    <div class="item-after"><b>{{this}}</b></div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        data: function () {
+            return {
+                cordova: device.cordova,
+                model: device.model,
+                platform: device.platform,
+                uuid: device.uuid,
+                version: device.version,
+                manufacturer: device.manufacturer,
+                isVirtual: device.isVirtual,
+                serial: device.serial,
+
+                DEFAULT_FONT_SIZE: 100,
+                DEFAULT_THEME: 'md',
+                current_theme: DB.get('settings', 'theme'),
+                current_font_size: DB.get('settings', 'font_size'),
+
+                database: DB.get(),
+
+                router_length: app.router.routes.length
+            }
+        },
+        methods: {
+            loggerTogle: function () {
+                let toggle = app.toggle.get('#toggle-logger');
+                DB.set('debug', 'logger', toggle.checked);
+
+                let state = '';
+                (toggle.checked ? state = 'Enabled' : state = 'Disabled');
+                app.toast.create({
+                    text: 'Logger: ' + state,
+                    closeTimeout: 2000
+                }).open();
+                app.methods.logger.set('Debug :: Logger ' + state , null, null, true)
+            },
+            clearDB: function () {
+                DB.clear();
+                $$('#buttonClearDB').attr('disabled', 'disabled');
+                $$('#buttonClearDB').css('background-color', '#f3f3f3');
+                app.methods.logger.set('Debug :: Database cleared');
+                app.toast.create({
+                    text: 'Database: Cleared',
+                    closeTimeout: 2000
+                }).open();
+            }
+        },
+        on: {
+            pageInit: function (e, page) {
+                let toggleLogger = DB.get('debug', 'logger');
+                if (toggleLogger) {
+                    $$(page.el).find('[data-name="logger"]').prop('checked', true);
+                } else {
+                    $$(page.el).find('[data-name="logger"]').prop('checked', false);
+                }
+            }
+        }
+    };
+</script>

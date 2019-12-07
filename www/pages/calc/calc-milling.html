@@ -1,0 +1,97 @@
+<div class="page" data-name="calc-milling">
+    <div class="navbar">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="link back" href="/">
+                    <i class="icon icon-back"></i>
+                </a>
+            </div>
+            <div class="title">Фрезерование</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="block-title searchbar-hide-on-search">Расчет режимов резания для фрезерной обработки</div>
+        <div class="list links-list searchbar-hide-on-search">
+            <form class="list" id="calc_milling">
+                <ul>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Диаметр фрезы, мм</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="Diametr" placeholder="20" type="number" value="20">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Скорость резания, м/мин</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="Speed" placeholder="80" type="number" value="80">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Подача на зуб, мм</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="FeedToPer" placeholder="0.1" step="0.01" type="number" value="0.1">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Количество зубьев</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="NumberPers" placeholder="3" step="1" type="number" value="3">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <div class="block block-strong row" style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+                <div class="col">
+                    <button class="col button button-raised button-fill button-round popup-open"
+                            data-popup=".popup-turning-result" onclick="app.methods.calc.milling()">Расчитать
+                    </button>
+                </div>
+            </div>
+            <div class="popup popup-turning-result">
+                <div class="page" data-name="calc">
+                    <div class="navbar">
+                        <div class="navbar-inner sliding">
+                            <div class="left">
+                                <a class="link popup-close color-black" href="#">
+                                    <i class="icon icon-back"></i>
+                                </a>
+                            </div>
+                            <div class="title">Результат расчетов</div>
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <div class="block">
+                            <div class="list links-list searchbar-hide-on-search">
+                                <div class="MillingResult"></div>
+                            </div>
+                            <div class="block block-strong row"
+                                 style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+                                <div class="col">
+                                    <button class="col button button-raised button-fill color-black button-round popup-close">
+                                        Закрыть
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

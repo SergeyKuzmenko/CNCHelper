@@ -1,0 +1,53 @@
+<template>
+    <div class="page" data-name="fanuc-turning-g">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="/" class="link back">
+                      <i class="icon icon-back"></i>
+                      <span class="ios-only">Назад</span>
+                  </a>
+              </div>
+              <div class="title">G-коды</div>
+          </div>
+      </div>
+      <div class="searchbar-backdrop"></div>
+      <form class="searchbar searchbar-init" data-search-container=".list" data-search-item="li" data-search-in=".item-title">
+        <div class="searchbar-inner">
+            <div class="searchbar-input-wrap">
+                <input type="search" placeholder="Поиск...">
+                <i class="searchbar-icon"></i>
+                <span class="input-clear-button"></span>
+            </div>
+            <span class="searchbar-disable-button">Отмена</span>
+        </div>
+    </form>
+    <div class="page-content">
+        <div class="block">
+            тут будут g-codes
+            <div class="list links-list">
+                <!-- <ul>
+                    {{#each mcodes}}
+                    <li class="item-title">
+                        <a href="/pr/mcodes/{{id}}/" class="item-title">
+                            <div class="item-inner">
+                                <div class="item-title"><span style="font-weight:bold">{{title}}</span> — {{name}}</div>
+                            </div>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul> -->
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+<script>
+    return {
+        data: function() {
+            return {
+                mcodes: MCODES,
+            };
+        }
+    };
+</script>

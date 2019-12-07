@@ -1,0 +1,23 @@
+{
+  "app": {
+    "version": 1,
+    "db_version": 1
+  },
+  "debug": {
+    "debug": true,
+    "logger": true
+  },
+  "settings": {
+    "name": "CNCHelper",
+    "font_size": 100,
+    "theme": "ios",
+    "night_mode": false,
+    "swipe_to_back": true,
+    "color_scheme": "black",
+    "api": "http://api/cnchelper/v1/"
+  },
+  "user": {
+    "username": "user",
+    "password": "password"
+  }
+}

@@ -1,0 +1,106 @@
+<div class="page">
+    <div class="navbar">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only"></span>
+                </a>
+            </div>
+            <div class="title">Резьбонарезный цикл G76</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="block-title">G76 - Цикл нарезания многозаходной резьбы</div>
+        <div class="block block-strong">
+            <p>В этом цикле нарезания резьбы резание выполняется одной кромкой при постоянной величине реза.</p>
+        </div>
+
+        <div class="block-title">Программирование</div>
+        <div class="block block-strong">
+            <pre class="sh_gcode">
+G76 P... Q... R...
+G76 X... Z... R... P... Q... F...
+</pre>
+        </div>
+
+        <div class="block-title">Параметры</div>
+        <div class="block block-strong">
+            <div class="block-title">Первая строка</div>
+            <p><b>P (m)</b> - Число повторений при чистовой обработке (от 1 до 99).</p>
+            <p><b>Q (∆dмин)</b> - Минимальная глубина реза. Если глубина резания одной циклической операции становится
+                меньше
+                этого предела, глубина резания фиксируется на этом значении.</p>
+            <p><b>R (d)</b> - Припуск на чистовую обработку.</p>
+            <div class="block-title">Вторая строка</div>
+            <p><b>X</b> - Координата по оси X конечной точки реза в направлении длины.</p>
+            <p><b>Z</b> - Координата по оси Z конечной точки реза в направлении длины.</p>
+            <p><b>R (i)</b> - Величина конуса. Если R = 0, можно выполнить обычную цилиндрическую резьбу.</p>
+            <p><b>P (k)</b> - Высота резьбы.</p>
+            <p><b>Q (∆d)</b> - Глубина первого реза.</p>
+            <p><b>F (L)</b> - Шаг резьбы.</p>
+        </div>
+
+        <div class="block-title">Схема обработки</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g76.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src, 'Траектория резания в цикле нарезания многозаходной резьбы')">
+                </p>
+                <p class="caption-text">Траектория резания в цикле нарезания многозаходной резьбы</p>
+            </div>
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g76-2.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src, 'Данные резания')">
+                </p>
+                <p class="caption-text">Данные резания</p>
+            </div>
+        </div>
+        <div class="block-title">Пояснение</div>
+        <div class="block block-strong">
+            <div class="block-title">Количество повторов при чистовой обработке</div>
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g76-3.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)">
+                </p>
+                <p>Повторяется последний цикл чистовой обработки (цикл, в котором срезается припуск на чистовую
+                    обработку).</p>
+            </div>
+
+            <div class="block-title">Операции</div>
+            <div class="block">
+                <p>Этот цикл выполняет нарезание резьбы таким образом, что длина шага только между C и D делается,
+                    как задано в коде F. На других отрезках инструмент перемещается в режиме ускоренного подвода.
+                    Константа времени для ускорения/замедления после интерполяции и скорость подачи FL для
+                    снятия фаски резьбы и скорость подачи для отведения после снятия фаски такие же, как для снятия
+                    фаски резьбы при помощи G92 (стандартный цикл).</p>
+            </div>
+
+            <div class="block-title">Останов подачи в цикле нарезания резьбы (отвод в цикле нарезания резьбы)</div>
+            <div class="block">
+                <p>Останов подачи можно применить во время нарезания резьбы в комбинированном цикле нарезания
+                    резьбы (G76). В этом случае инструмент быстро отводится таким же образом, как для последнего
+                    снятия фаски в цикле нарезания резьбы, и возвращается в исходную точку в текущем цикле
+                    (позиция, где заготовка срезается по ∆dn).
+                    При запуске цикла, возобновляется цикл нарезания многозаходной резьбы.</p>
+                <p><img src="./img/pr/fanuc-img/cycle-g76-4.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)">
+                </p>
+            </div>
+        </div>
+        <div class="block-title">Пример программы</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g76-5.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)"></p>
+            </div>
+            <p>Пример программы для эскиза что задан выше</p>
+            <pre class="sh_gcode">
+G80 X80.0 Z130.0
+G76 P011060 Q100 R200
+G76 X60.64 Z25.0 P3680 Q1800 F6.0
+</pre>
+        </div>
+
+    </div>
+</div>

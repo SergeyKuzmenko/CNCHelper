@@ -1,0 +1,81 @@
+<!--suppress ALL -->
+<template>
+    <div class="page" data-name="gcode">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a class="link back" href="#">
+                        <i class="icon icon-back"></i>
+                    </a>
+                </div>
+                <div class="title">Log</div>
+                <div class="right">
+                    <a href="#" class="link popover-open" data-popover=".popover-log"><i class="f7-icons">ellipsis_vertical</i></a>
+                </div>
+            </div>
+        </div>
+        <div class="popover popover-log">
+            <div class="popover-inner">
+                <div class="list links-list">
+                    <ul>
+                        <li>
+                            <a class="panel-close back" href="#"
+                               onclick="
+                               app.methods.logger.clear();
+                               app.popover.close();
+                               app.toast.create({text: 'Log cleared', closeTimeout: 2000}).open();"
+                            >
+                                <div class="item-media">
+                                    <i class="f7-icons">trash</i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Clear Log</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <!-- Table -->
+            <div class="card data-table data-table-collapsible data-table-init">
+                <div class="card-content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="numeric-cell">Date</th>
+                            <th class="numeric-cell">Time</th>
+                            <th class="numeric-cell">Path</th>
+                            <th class="numeric-cell">URL</th>
+                            <th class="label-cell">Message</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each logger}}
+                        <tr>
+                            <td class="numeric-cell">{{this.date}}</td>
+                            <td class="numeric-cell">{{this.time}}</td>
+                            <td class="numeric-cell">{{this.path}}</td>
+                            <td class="numeric-cell">{{this.url}}</td>
+                            <td class="label-cell">{{this.message}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--- EndTable --->
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        data: function () {
+            return {
+                logger: app.methods.logger.get()
+            }
+        }
+    };
+</script>

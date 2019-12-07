@@ -1,0 +1,38 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="ios-only">Назад</span>
+                    </a>
+                </div>
+                <div class="title">{{sinumerik.code}}</div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title"><b>{{sinumerik.code}}</b></div>
+            <div class="block block-strong">
+                {{sinumerik.name}}
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        data: function () {
+            var sinumerikId = this.$route.params.id;
+            console.log(sinumerikId);
+            var currentSinumerik;
+            SIEMENS_SINUMERIK_MILL.forEach(function (sinumerik) {
+                if (sinumerik.code === sinumerikId) {
+                    currentSinumerik = sinumerik;
+                }
+            });
+            return {
+                sinumerik: currentSinumerik,
+            };
+        }
+    };
+</script>

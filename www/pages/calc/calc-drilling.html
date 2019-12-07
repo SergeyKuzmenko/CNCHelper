@@ -1,0 +1,87 @@
+<div class="page" data-name="calc-drilling">
+    <div class="navbar">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a class="link back" href="/">
+                    <i class="icon icon-back"></i>
+                </a>
+            </div>
+            <div class="title">Сверление</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="block-title searchbar-hide-on-search">Расчет режимов резания для сверления</div>
+        <div class="list links-list searchbar-hide-on-search">
+            <form class="list" id="calc_drilling">
+                <ul>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Диаметр сверла, мм</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="Diametr" placeholder="10" type="number" value="10">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Скорость резания, м/мин</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="Speed" placeholder="10" type="number" value="10">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Подача на оборот, мм</div>
+                                <div class="item-input-wrap">
+                                    <input min="0" name="Feed" placeholder="0.2" step="0.01" type="number" value="0.2">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <div class="block block-strong row" style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+                <div class="col">
+                    <button class="col button button-raised button-fill button-round popup-open"
+                            data-popup=".popup-turning-result" onclick="app.methods.calc.drilling()">Расчитать
+                    </button>
+                </div>
+            </div>
+            <div class="popup popup-turning-result">
+                <div class="page" data-name="calc">
+                    <div class="navbar">
+                        <div class="navbar-inner sliding">
+                            <div class="left">
+                                <a class="link popup-close color-black" href="#">
+                                    <i class="icon icon-back"></i>
+                                </a>
+                            </div>
+                            <div class="title">Результат расчетов</div>
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <div class="block">
+                            <div class="list links-list searchbar-hide-on-search">
+                                <div class="DrillingResult"></div>
+                            </div>
+                            <div class="block block-strong row"
+                                 style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+                                <div class="col">
+                                    <button class="col button button-raised button-fill color-black button-round popup-close">
+                                        Закрыть
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

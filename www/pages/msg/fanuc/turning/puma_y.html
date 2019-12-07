@@ -1,0 +1,31 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="/" class="link back">
+                      <i class="icon icon-back"></i>
+                      <span class="ios-only">Назад</span>
+                    </a>
+                </div>
+                <div class="title">Сообщения: Doosan Puma Y/SY</div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block" id="list_msg">
+
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageMounted: function () {
+                app.request.get('data/msg/fanuc/turning/PumaY.html', function (data) {
+                    $$('#list_msg').html(data);
+                });
+            }
+        }
+    }
+</script>

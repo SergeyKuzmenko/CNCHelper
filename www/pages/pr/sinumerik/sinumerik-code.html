@@ -1,0 +1,55 @@
+<template>
+  <div class="page" data-name="{{data.title}}">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="#">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+          <div class="title">{{data.title}}</div>
+        </div>
+        <div class="right">
+          <div class="preloader"></div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Описание</div>
+      <div class="block block-strong">
+        <b>{{data.title}}</b> - {{data.description}}
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    data: function () {
+      return {
+        url: './data/pr/sinumerik/sinumerik.json',
+        data: []
+      }
+    },
+    on: {
+      pageMounted: function () {
+        let self = this;
+        let id = self.$route.params.id;
+        let app = self.$app;
+        let currentItem;
+
+        app.request.json(self.url, function (json) {
+          json.forEach(function (item) {
+            if (item.id === id) {
+              currentItem = item;
+              self.$setState({data: item});
+              $$('.preloader').hide();
+            }
+          });
+        });
+      },
+      pageBeforeIn: function () {
+        sh_highlightDocument();
+      }
+    }
+  };
+</script>

@@ -1,0 +1,86 @@
+<div class="page">
+    <div class="navbar">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only"></span>
+                </a>
+            </div>
+            <div class="title">Токарный цикл G72</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="block-title">Токарный цикл G72</div>
+        <div class="block block-strong">
+            <p>Этот цикл выполняется так же, как G71, за исключением того, что резание выполняется
+                посредством операции, параллельной оси Х (для плоскости XZ).</p>
+        </div>
+
+        <div class="block-title">Программирование</div>
+        <div class="block block-strong">
+            <pre class="sh_gcode">
+G72 W... R...
+G72 P... Q... U... W... F... S... T...
+</pre>
+        </div>
+
+        <div class="block-title">Параметры</div>
+        <div class="block block-strong">
+            <div class="block-title">Первая строка</div>
+            <p><b>W</b> - Глубина резания. Это значение является модальным и не изменяется, пока не будет задано другое
+                значение. </p>
+            <p><b>R</b> - Величина отвода от обрабатываемой поверхности</p>
+            <div class="block-title">Вторая строка</div>
+            <p><b>P</b> - Порядковый номер первого блока для программы чистовой обработки.</p>
+            <p><b>Q</b> - Порядковый номер последнего блока для программы чистовой обработки.</p>
+            <p><b>U</b> - Расстояние припуска на чистовую обработку в направлении оси X на плоскости (ось X для
+                плоскости XZ)</p>
+            <p><b>W</b> - Расстояние припуска на чистовую обработку в направлении первой оси Z на плоскости (ось Z для
+                плоскости XZ)</p>
+            <p><b>F</b> - Подача во время цикла G72</p>
+            <p><b>S</b> - Скорость вращения шпинделя во время цикла G72</p>
+            <p><b>T</b> - Инструмент во время цикла G72</p>
+        </div>
+
+        <div class="block-title">Схема обработки</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g72.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)"></p>
+                <p class="caption-text">Траектория резания при съеме припуска при подрезке торца</p>
+            </div>
+        </div>
+        <div class="block-title">Примечания</div>
+        <div class="block block-strong">
+            <ol type="1">
+                <li>Если W и U заданы одним и тем же адресом, то их значения определяются наличием адресов P и Q.</li>
+                <li>Циклическая обработка задается командой G72 с указанием значений в P и Q.</li>
+                <li>Функции F, S и T, которые задаются в команде перемещения между точками
+                    A и B, не действуют, а функции, заданные в блоке G72 или предыдущем
+                    блоке, действуют. Функции M и вторичные вспомогательные функции
+                    обрабатываются так же, как функции F, S и T.
+                </li>
+                <li>Если включена функция управления постоянной скорости резания, команда G96 или G97,
+                    заданная в команде перемещения между точками A и B, игнорируется.
+                    Если необходимо включить команду G96 или G97, задайте ее в G71 или в
+                    предыдущем блоке.
+                </li>
+            </ol>
+        </div>
+
+        <div class="block-title">Пример программы</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-72-2.jpg" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)"></p>
+            </div>
+            <p>Пример программы для эскиза что задан выше</p>
+            <pre class="sh_gcode">
+N50 G00 X106 Z5 M3 S800
+N60 G71 U10 R10
+N70 G71 P80 Q90 U3 W0 F0.25
+N80 G00 X60
+N90 G01 Z-75</pre>
+    </div>
+</div>

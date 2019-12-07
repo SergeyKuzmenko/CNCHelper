@@ -1,0 +1,119 @@
+/* Code highlighting */
+pre, code, kbd, samp, tt {
+    margin: 10px 0 !important;
+    font-family: monospace !important;
+    font-size: 15px !important;
+    line-height: normal !important;
+    background-color: #F8F8F8;
+    border: 1px solid #dedee2;
+    padding: 5px 8px;
+    border-radius: 5px;
+    color: #444;
+}
+
+code {
+    display: inline-block;
+}
+
+pre {
+    overflow: auto;
+}
+
+pre.sh_sourceCode {
+    background-color: #ffffff;
+    color: #401e7a;
+    font-weight: normal !important;
+    font-style: normal !important;
+}
+
+pre.sh_sourceCode .sh_comment {
+    color: #38ad24;
+}
+
+pre.sh_sourceCode .sh_o {
+    color: #ff3030;
+}
+
+pre.sh_sourceCode .sh_n {
+    color: #B26818;
+}
+
+pre.sh_sourceCode .sh_t {
+    color: #0c82df; /* #0a7f6d */
+}
+
+pre.sh_sourceCode .sh_g {
+    color: #0000ff;
+}
+pre.sh_sourceCode .sh_g_rapid {
+    color: red;
+    background-color: #ffdffd;
+}
+pre.sh_sourceCode .sh_g_work {
+    color: green;
+    background-color: #baeeba;
+}
+
+pre.sh_sourceCode .sh_m {
+    color: #7f0055;
+}
+
+pre.sh_sourceCode .sh_s {
+    color: #620ac6;
+}
+
+pre.sh_sourceCode .sh_f {
+    color: #620ac6;
+}
+
+pre.sh_sourceCode .sh_x {
+    color: #006699;
+}
+
+pre.sh_sourceCode .sh_y {
+    color: #7f0055;
+}
+
+pre.sh_sourceCode .sh_z {
+    color: #ff1493;
+}
+/* Other styles */
+img.responsive {
+    width: 100%;
+    height: auto;
+}
+img.image-lazy {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+div.image-lazy {
+    background: #aaa;
+    background-size: cover;
+    height: 60vw;
+}
+
+.demo-card-header-pic .card-header {
+    height: 40vw;
+    width: auto;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.demo-card-header-pic .card-content-padding .date {
+    color: #8e8e93;
+}
+
+.caption-text {
+    margin-top: -10px;
+    text-align: center;
+    font-style: italic;
+}
+
+.card-expandable {
+    height: 190px;
+}
+.card-expandable .card-header {
+    font-size: 20px;
+}
