@@ -3,6 +3,7 @@
     "version": 1,
     "db_version": 1
   },
+  "device": {},
   "debug": {
     "debug": true,
     "logger": true
@@ -13,11 +14,9 @@
     "theme": "ios",
     "night_mode": false,
     "swipe_to_back": true,
-    "color_scheme": "black",
-    "api": "http://api/cnchelper/v1/"
+    "color_scheme": "blue"
   },
-  "user": {
-    "username": "user",
-    "password": "password"
+  "api": {
+    "url": "http://api/cnchelper/v1/"
   }
 }

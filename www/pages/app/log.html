@@ -20,12 +20,10 @@
                 <div class="list links-list">
                     <ul>
                         <li>
-                            <a class="panel-close back" href="#"
-                               onclick="
+                            <a class="panel-close back" href="#" onclick="
                                app.methods.logger.clear();
                                app.popover.close();
-                               app.toast.create({text: 'Log cleared', closeTimeout: 2000}).open();"
-                            >
+                               app.toast.create({text: 'Log cleared', closeTimeout: 2000}).open();">
                                 <div class="item-media">
                                     <i class="f7-icons">trash</i>
                                 </div>
@@ -44,24 +42,22 @@
                 <div class="card-content">
                     <table>
                         <thead>
-                        <tr>
-                            <th class="numeric-cell">Date</th>
-                            <th class="numeric-cell">Time</th>
-                            <th class="numeric-cell">Path</th>
-                            <th class="numeric-cell">URL</th>
-                            <th class="label-cell">Message</th>
-                        </tr>
+                            <tr>
+                                <th class="numeric-cell">Date</th>
+                                <th class="numeric-cell">Path</th>
+                                <th class="numeric-cell">URL</th>
+                                <th class="label-cell">Message</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {{#each logger}}
-                        <tr>
-                            <td class="numeric-cell">{{this.date}}</td>
-                            <td class="numeric-cell">{{this.time}}</td>
-                            <td class="numeric-cell">{{this.path}}</td>
-                            <td class="numeric-cell">{{this.url}}</td>
-                            <td class="label-cell">{{this.message}}</td>
-                        </tr>
-                        {{/each}}
+                            {{#each logger}}
+                            <tr>
+                                <td class="numeric-cell">{{ formatISODate this.date }}</td>
+                                <td class="numeric-cell">{{this.path}}</td>
+                                <td class="numeric-cell">{{this.url}}</td>
+                                <td class="label-cell">{{this.message}}</td>
+                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
@@ -71,11 +67,16 @@
     </div>
 </template>
 <script>
-    return {
-        data: function () {
-            return {
-                logger: app.methods.logger.get()
-            }
+Template7.registerHelper('formatISODate', function(str) {
+    let parts = str.match(/\d+/g);
+    let d = new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
+    return `[${d.getDate()}/${d.getMonth()}/${d.getFullYear()}] [${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}]`;
+});
+return {
+    data: function() {
+        return {
+            logger: app.methods.logger.get()
         }
-    };
+    }
+};
 </script>

@@ -1,4 +1,3 @@
-moment.locale('ru');
 const $$ = Dom7;
 const app = new Framework7({
     root: '#app',
@@ -22,13 +21,25 @@ const app = new Framework7({
                 reloadCurrent: true
             });
         },
+        date: function() {
+            return new Date();
+        },
+        currentPageName: function() {
+            return this.views.main.router.currentPageEl.dataset.name;
+        },
+        currentUrl: function() {
+            return app.views.main.router.url;
+        },
+        currentPath: function() {
+            return app.views.main.router.currentRoute.route.url;
+        },
         reloadApp: function () {
             navigator.splashscreen.show();
-            setTimeout(function () {
+            //setTimeout(function () {
                 location.reload();
-            }, 1000, function() {
-                navigator.splashscreen.hide();
-            });
+            //}, 1000, function() {
+            //    navigator.splashscreen.hide();
+            //});
         },
         selectTheme: function(theme) {
             DB.set('settings', 'theme', theme);
@@ -164,17 +175,8 @@ const app = new Framework7({
                 }]
             }).open();
         },
-        currentPageName: function() {
-            return this.views.main.router.currentPageEl.dataset.name;
-        },
-        currentUrl: function() {
-            return app.views.main.router.url;
-        },
-        currentPath: function() {
-            return app.views.main.router.currentRoute.route.url;
-        },
         logger: {
-            name: 'log',
+            name: 'cnchelper_log',
             items: [],
             url: function() {
                 return app.views.main.router.url;
@@ -185,8 +187,7 @@ const app = new Framework7({
             set: function(message, url = null, path = null, hardSet = false) {
                 let template = {
                     uid: app.utils.id(),
-                    date: moment().format('L'),
-                    time: moment().format('LTS'),
+                    date: app.methods.date(),
                     path: path,
                     url: url,
                     message: message
