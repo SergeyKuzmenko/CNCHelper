@@ -123,13 +123,11 @@
         </div>
     </div>
 </template>
-<!--suppress JSAnnotator -->
+
 <script>
 return {
     data: function() {
-        return {
-            //
-        }
+        //
     },
     methods: {
         nightModeTogle: function() {
@@ -138,7 +136,11 @@ return {
             app.methods.togleNightMode(nmt[0].checked);
 
             let state = '';
-            (nmt[0].checked ? state = 'Включен' : state = 'Выключен');
+            if (nmt[0].checked) {
+                state = 'Включен';
+            }else{
+                state = 'Выключен';
+            }
 
             app.toast.create({
                 text: 'Ночной режим: ' + state,
