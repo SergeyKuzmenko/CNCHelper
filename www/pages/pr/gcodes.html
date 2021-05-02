@@ -1,0 +1,82 @@
+﻿<template>
+  <div class="page" data-name="gcodes">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">G-коды</div>
+        <div class="right">
+          <div class="preloader"></div>
+        </div>
+      </div>
+    </div>
+    <div class="searchbar-backdrop"></div>
+    <form
+      class="searchbar searchbar-init"
+      data-search-container=".list"
+      data-search-in=".item-title"
+      data-search-item="li"
+    >
+      <div class="searchbar-inner">
+        <div class="searchbar-input-wrap">
+          <input placeholder="Поиск..." type="search" />
+          <i class="searchbar-icon"></i>
+          <span class="input-clear-button"></span>
+        </div>
+        <span class="searchbar-disable-button">Отмена</span>
+      </div>
+    </form>
+    <div class="page-content">
+      <div class="list links-list searchbar-found">
+        <ul>
+          {{#each data}}
+          <li class="item-title">
+            <a class="item-title" href="/pr/gcodes/{{id}}/">
+              <div class="item-inner">
+                <div class="item-title">
+                  <span class="item-title-bold">{{title}}</span> — {{name}}
+                </div>
+              </div>
+            </a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="block searchbar-not-found">
+        <div class="block-inner">Ничего не найдено</div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    data: function() {
+      return {
+        url: "./data/pr/gcodes.json",
+        data: []
+      };
+    },
+    on: {
+      pageMounted: function() {
+        let self = this;
+        let app = self.$app;
+        app.request.json(self.url, function(json) {
+          self.$setState({ data: json });
+          $$(".preloader").hide();
+        });
+      }
+    }
+  };
+</script>
+<style>
+  .item-title-bold {
+    font-weight: bold;
+  }
+  .preloader {
+    margin-right: 10px;
+  }
+</style>

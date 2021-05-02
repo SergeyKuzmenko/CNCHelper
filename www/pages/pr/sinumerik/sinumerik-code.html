@@ -1,0 +1,43 @@
+<template>
+  <div class="page" data-name="{{data.title}}">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">{{data.title}}</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Описание</div>
+      <div class="block block-strong">
+        <b>{{data.title}}</b> - {{data.description}}
+      </div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function () {
+      return {
+        url: './data/pr/sinumerik/sinumerik.json',
+        data: []
+      }
+    },
+    on: {
+      pageBeforeIn: function () {
+        let self = this;
+        let id = self.$route.params.id;
+        let app = self.$app;
+        app.request.json(this.url, function (json) {
+          let current = json.find(item => item.title === id);
+          self.$setState({data: current});
+        });
+      }
+    }
+  };
+</script>

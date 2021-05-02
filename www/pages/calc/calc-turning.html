@@ -1,0 +1,122 @@
+﻿<template>
+  <div class="page" data-name="calc-turning">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">Точение</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Расчет режимов резания для токарной обработки</div>
+      <div class="list">
+
+        <form class="list form-store-data" id="turning">
+          <ul>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Диаметр заготовки, мм</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="Diametr" name="Diametr" placeholder="{{ Diametr }}" type="number" value="{{ Diametr }}">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Скорость резания, м/мин</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="Speed" name="Speed" placeholder="{{ Speed }}" type="number" value="{{ Speed }}">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Подача на оборот, мм</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="Feed" name="Feed" placeholder="{{ Feed }}" step="0.05" type="number" value="{{ Feed }}">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <p></p>
+          {{#if SpindleSpeed}}
+          <ul>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Скорость вращения шпинделя, об/мин</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="SpindleSpeed" placeholder="{{ SpindleSpeed }}" type="number" readonly="readonly">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Минутная подача, мм/мин</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="MinuteFeed" placeholder="{{ MinuteFeed }}" type="number" readonly="readonly">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          {{/if}}
+
+        </form>
+        <div class="block block-strong row" style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+          <div class="col">
+            <button class="col button button-raised button-fill button-round" @click="turning">Расчитать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function () {
+      return {
+        Diametr: 100,
+        Speed: 250,
+        Feed: 0.25,
+        SpindleSpeed: 0,
+        MinuteFeed: 0
+      }
+    },
+    methods: {
+      turning: function () {
+        let inputData = {
+          diametr: Number.parseFloat(this.$el.find('#Diametr').val()),
+          speed: Number.parseFloat(this.$el.find('#Speed').val()),
+          feed: Number.parseFloat(this.$el.find('#Feed').val())
+        }
+        if (!inputData.diametr || !inputData.feed || !inputData.speed) {
+          app.dialog.alert("Введеные данные не валидны! Исправьте и повторите ещё раз.", "Ошибка");
+          console.log(inputData);
+          app.methods.logger.set(inputData);
+        } else {
+          this.$setState({
+            Diametr: inputData.diametr,
+            Speed: inputData.speed,
+            Feed: inputData.feed,
+            SpindleSpeed: Math.round((inputData.speed * 1000) / (Math.PI * inputData.diametr)),
+            MinuteFeed: Math.round(((inputData.speed * 1000) / (Math.PI * inputData.diametr)) * inputData.feed)
+          });
+        }
+      },
+    }
+  }
+</script>

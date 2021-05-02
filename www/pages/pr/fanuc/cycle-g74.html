@@ -1,0 +1,81 @@
+<div class="page">
+    <div class="navbar">
+        <div class="navbar-inner sliding">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon icon-back"></i>
+                    <span class="ios-only"></span>
+                </a>
+            </div>
+            <div class="title">Циклы сверления G74</div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="block-title">G74 - Цикл сверления торцевой поверхности с периодическим выводом сверла</div>
+        <div class="block block-strong">
+            <p>Этот цикл позволяет стружкодробление при обработке внешнего диаметра. Если вторая ось на
+                плоскости (ось X (ось U) для плоскости ZX) и адрес P не указаны, то операция выполняется только
+                вдоль первой оси на плоскости (ось Z для плоскости ZX), то есть, выполняется цикл сверления с
+                периодическим выводом сверла.</p>
+        </div>
+
+        <div class="block-title">Программирование</div>
+        <div class="block block-strong">
+            <pre class="sh_gcode">
+G74 R...
+G74 X... Z... P... Q... R... F...
+</pre>
+        </div>
+
+        <div class="block-title">Параметры</div>
+        <div class="block block-strong">
+            <div class="block-title">Первая строка</div>
+            <p><b>R (e)</b> - Величина возврата. Это значение является модальным и не изменяется, пока не будет задано
+                другое значение.</p>
+            <div class="block-title">Вторая строка</div>
+            <p><b>X</b> - Координата оси X на плоскости (ось X для плоскости ZX) в точке B.</p>
+            <p><b>Z</b> - Координата оси Z на плоскости (ось Z для плоскости ZX) в точке C.</p>
+            <p><b>P (∆i)</b> - Расстояние перемещения в направлении второй оси на плоскости (ось X для плоскости ZX).
+            </p>
+            <p><b>Q (∆k)</b> - Глубина резания в направлении первой оси на плоскости
+                (ось Z для плоскости ZX).</p>
+            <p><b>R (∆d)</b> - Величина отвода инструмента при проходе на конечную точку.</p>
+            <p><b>F</b> - Скорость подачи.</p>
+        </div>
+
+        <div class="block-title">Схема обработки</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-g74.png" class="responsive"
+                        onclick="app.methods.openPhoto(this.src, 'Траектория резания в цикле сверления в торце с периодическим выводом сверла')"></p>
+                <p class="caption-text">Траектория резания в цикле сверления в торце с периодическим выводом сверла</p>
+            </div>
+        </div>
+        <div class="block-title">Пояснение</div>
+        <div class="block block-strong">
+            <p>
+                Повторяется циклическая операция резания по ∆k и возврата по e.
+                При проходе до точки C инструмент отводится на ∆d. Затем инструмент возвращается на скорости
+                ускоренного перемещения, перемещается в направлении точки B на ∆i и снова выполняет резание.
+            </p>
+        </div>
+
+        <div class="block-title">Пример программы</div>
+        <div class="block block-strong">
+            <div class="block">
+                <p><img src="./img/pr/fanuc-img/cycle-74-2.jpg" class="responsive"
+                        onclick="app.methods.openPhoto(this.src)"></p>
+            </div>
+            <p>Пример программы для эскиза что задан выше</p>
+            <pre class="sh_gcode">
+N10 T5
+N20 G97 S500 M03
+N30 G00 X0 Z2
+N40 G74 R1
+N50 G74 Z-60 Q30000 F0.1
+N60 G00 X100 Z100
+N70 M30
+</pre>
+        </div>
+    </div>
+</div>

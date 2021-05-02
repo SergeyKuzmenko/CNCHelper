@@ -1,0 +1,98 @@
+<template>
+  <div class="page" data-name="calc-roughness-turn">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">Шероховатость при точении</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Расчет шероховатости при точении</div>
+      <div class="list">
+        <form class="list form-store-data" id="calc-roughness-turn">
+          <ul>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Подача, мм/об</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="Feed" name="Feed" step="0.01" placeholder="{{ Feed }}" type="number"
+                           value="{{ Feed }}">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Радиус пластины, мм</div>
+                  <div class="item-input-wrap">
+                    <input min="0" id="Radius" name="Radius" placeholder="{{ Radius }}" type="number"
+                           value="{{ Radius }}">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <p></p>
+          {{#if Roughness}}
+          <ul>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Расчетная шероховатость, Ra</div>
+                <div class="item-input-wrap">
+                  <input min="0" id="Roughness" placeholder="{{ Roughness }}" type="number" readonly="readonly">
+                </div>
+              </div>
+            </div>
+            </li>
+          </ul>
+          {{/if}}
+
+        </form>
+        <div class="block block-strong row" style="position: fixed; bottom: -25px; left: 0; width: 100%;">
+          <div class="col">
+            <button class="col button button-raised button-fill button-round" @click="roughnessTurn">Расчитать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function () {
+      return {
+        Feed: 0.06,
+        Radius: 0.4,
+        Roughness: 0
+      }
+    },
+    methods: {
+      roughnessTurn: function () {
+        let inputData = {
+          feed: Number.parseFloat(this.$el.find('#Feed').val()),
+          radius: Number.parseFloat(this.$el.find('#Radius').val())
+        }
+        if (!inputData.feed || !inputData.radius) {
+          app.dialog.alert("Введеные данные не валидны! Исправьте и повторите ещё раз.", "Ошибка");
+          console.log(inputData);
+          app.methods.logger.set(inputData);
+        } else {
+          this.$setState({
+            Feed: inputData.feed,
+            Radius: inputData.radius,
+            Roughness: (((Math.pow(inputData.feed, 2)) / (inputData.radius * 8)) * 1000).toFixed(3)
+          });
+        }
+      },
+    }
+  }
+</script>

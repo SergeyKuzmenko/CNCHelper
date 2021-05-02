@@ -1,0 +1,38 @@
+<template>
+  <div class="page" data-name="gcode">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">{{gcode.code}}</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Описание</div>
+      <div class="block block-strong">
+        {{gcode.name}}
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    data: function() {
+      var gcodeId = this.$route.params.id;
+      console.log(gcodeId);
+      var currentGcode;
+      FANUC_TURNING_G.forEach(function(gcode) {
+        if (gcode.code === gcodeId) {
+          currentGcode = gcode;
+        }
+      });
+      return {
+        gcode: currentGcode
+      };
+    }
+  };
+</script>

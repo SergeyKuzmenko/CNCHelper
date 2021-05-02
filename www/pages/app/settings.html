@@ -1,0 +1,500 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">Настройки</div>
+        <div class="right">
+          <a class="link popover-open" data-popover=".popover-debug" href="#"
+          ><i class="f7-icons">ellipsis_vertical</i></a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="popover popover-debug">
+      <div class="popover-inner">
+        <div class="list links-list">
+          <ul>
+            <li>
+              <a
+                  class="panel-close"
+                  href="/about/"
+                  onclick="app.popover.close();"
+              >
+                <div class="item-media">
+                  <i class="f7-icons">info_round</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title">О приложении</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                  class="panel-close"
+                  href="/debug/"
+                  onclick="app.popover.close();"
+              >
+                <div class="item-media">
+                  <i class="f7-icons">hammer</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title">Отладка</div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                  class="panel-close"
+                  href=""
+                  onclick="app.methods.reloadApp();"
+              >
+                <div class="item-media">
+                  <i class="f7-icons">arrow_2_circlepath</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title">Перезапустить</div>
+                </div>
+              </a>
+            </li>
+            <li style="color:red">
+              <a
+                  class="panel-close"
+                  href=""
+                  onclick="window.navigator.app.exitApp();"
+              >
+                <div class="item-media">
+                  <i class="f7-icons">xmark_octagon</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title">Закрыть</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Внешний вид</div>
+      <div class="list">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Ночной режим</div>
+                <div class="item-after">
+                  <label class="toggle toggle-init">
+                    <input
+                        type="checkbox"
+                        id="nmp"
+                        data-name="night-mode-togle"
+                        @click="nightModeTogle"
+                    />
+                    <span class="toggle-icon"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Ночной режим по расписанию</div>
+                <div class="item-after">
+                  {{#if night_mode_timetable}}
+                  <a
+                      class="link sheet-open"
+                      style="margin-right: 10px;"
+                      href="#"
+                      data-sheet=".night-mode-settings"
+                  >Настроить</a
+                  >
+                  {{/if}}
+                  <label class="toggle toggle-init">
+                    <input
+                        type="checkbox"
+                        data-name="night-mode-timetable-togle"
+                        @click="nightModeTimetableTogle"
+                    />
+                    <span class="toggle-icon"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="sheet-modal night-mode-settings">
+              <div class="toolbar">
+                <div class="toolbar-inner">
+                  <div class="left">
+                    <a class="link sheet-close" href="#">Отмена</a>
+                  </div>
+                  <div class="title">Расписание</div>
+                  <div class="right">
+                    <a
+                        class="link sheet-close"
+                        @click="saveNightModeTimetable"
+                        href="#"
+                    >Сохранить</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="sheet-modal-inner">
+                <div class="list inline-labels no-hairlines-md">
+                  <ul>
+                    <li class="item-time-picker-start">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Начало</div>
+                          <div class="item-after">
+                            <input
+                                type="time"
+                                value="{{ night_mode_timetable_start }}"
+                                placeholder="22:00"
+                                id="timePickerStart"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item-time-picker-end">
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">Конец</div>
+                          <div class="item-after">
+                            <input
+                                type="time"
+                                value="{{ night_mode_timetable_end }}"
+                                placeholder="06:00"
+                                id="timePickerEnd"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Цветовая тема</div>
+                <div class="item-after">
+                  <a href="#" @click="changeColorScheme">Выбрать</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Размер шрифта</div>
+                <div class="item-after">
+                  <div class="stepper stepper-init">
+                    <div
+                        class="stepper-button-minus"
+                        onclick="app.methods.fontSize('minus');"
+                    ></div>
+                    <div class="stepper-input-wrap">
+                      <input
+                          id="fontSizeValue"
+                          type="text"
+                          value="100"
+                          min="50"
+                          max="150"
+                          step="1"
+                          readonly
+                      />
+                    </div>
+                    <div
+                        class="stepper-button-plus"
+                        onclick="app.methods.fontSize('plus');"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="block-title">Управление</div>
+      <div class="list">
+        <ul>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Сайп назад</div>
+                <div class="item-after">
+                  <label class="toggle toggle-init">
+                    <input
+                        type="checkbox"
+                        id="stb"
+                        data-name="swipe-to-back-togle"
+                        @click="swipeToBack"
+                    />
+                    <span class="toggle-icon"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="block-title">Тема приложения</div>
+      <div class="block">
+        <p class="segmented segmented-raised">
+          <button
+              class="button"
+              data-theme="md"
+              onclick="app.methods.selectTheme('md')"
+          >
+            Material
+          </button>
+          <button
+              class="button"
+              data-theme="ios"
+              onclick="app.methods.selectTheme('ios')"
+          >
+            iOS
+          </button>
+          <button
+              class="button"
+              data-theme="aurora"
+              onclick="app.methods.selectTheme('aurora')"
+          >
+            Aurora
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function () {
+      return {
+        night_mode_timetable: DB.get("settings", "night_mode_timetable"),
+        night_mode_timetable_start: DB.get("settings", "night_mode_timetable_start"),
+        night_mode_timetable_end: DB.get("settings", "night_mode_timetable_end")
+      }
+    },
+    methods: {
+      checkNightModeTimetable: function () {
+        if (this.night_mode_timetable) {
+          $('[data-name="night-mode-timetable-togle"]').prop("checked", true)
+        } else {
+          $('[data-name="night-mode-timetable-togle"]').prop("checked", false)
+        }
+      },
+      nightModeTimetableTogle: function () {
+        let self = this;
+        let app = self.$app;
+        self.$setState({
+          night_mode_timetable: !this.night_mode_timetable,
+        });
+        DB.set("settings", "night_mode_timetable", this.night_mode_timetable);
+        if (this.night_mode_timetable) {
+          app.methods.togleNightMode()
+          app.toast
+              .create({
+                text: "Ночной режим по расписанию: Включен",
+                closeTimeout: 2000
+              })
+              .open();
+        } else if (!this.night_mode_timetable) {
+          app.methods.togleNightMode()
+          app.toast
+              .create({
+                text: "Ночной режим по расписанию: Выключен",
+                closeTimeout: 2000
+              })
+              .open();
+        }
+      },
+      saveNightModeTimetable: function () {
+        let self = this;
+        let app = self.$app;
+
+        let start = $.trim($$("#timePickerStart")[0].value);
+        let end = $.trim($$("#timePickerEnd")[0].value);
+
+        if (start && end) {
+          self.$setState({
+            night_mode_timetable_start: start,
+            night_mode_timetable_end: end
+          });
+          DB.set("settings", "night_mode_timetable_start", start);
+          DB.set("settings", "night_mode_timetable_end", end);
+          app.dialog.alert("Настройки для ночного режима изменены", "Сохранено", function () {
+            app.methods.reloadApp();
+          });
+          app.methods.togleNightMode();
+        }
+      },
+      nightModeTogle: function () {
+        let nmt = this.$el.find('[data-name="night-mode-togle"]');
+        DB.set("settings", "night_mode", nmt[0].checked);
+        app.methods.togleNightMode(nmt[0].checked);
+
+        let state = "";
+        if (nmt[0].checked) {
+          state = "Включен";
+        } else {
+          state = "Выключен";
+        }
+
+        app.toast
+            .create({
+              text: "Ночной режим: " + state,
+              closeTimeout: 2000
+            })
+            .open();
+      },
+      changeColorScheme: function () {
+        app.actions
+            .create({
+              buttons: [
+                {
+                  text: "Выбрать цвет",
+                  label: true
+                },
+                {
+                  text: "Синий",
+                  bold: true,
+                  color: "blue",
+                  onClick: function () {
+                    app.methods.togleColorScheme("blue");
+                    app.toast
+                        .create({
+                          text: "Цветовая схема: " + "Синяя",
+                          closeTimeout: 2000
+                        })
+                        .open();
+                  }
+                },
+                {
+                  text: "Черный",
+                  bold: true,
+                  color: "black",
+                  onClick: function () {
+                    app.methods.togleColorScheme("black");
+                    app.toast
+                        .create({
+                          text: "Цветовая схема: " + "Черная",
+                          closeTimeout: 2000
+                        })
+                        .open();
+                  }
+                },
+                {
+                  text: "Красный",
+                  bold: true,
+                  color: "red",
+                  onClick: function () {
+                    app.methods.togleColorScheme("red");
+                    app.toast
+                        .create({
+                          text: "Цветовая схема: " + "Красная",
+                          closeTimeout: 2000
+                        })
+                        .open();
+                  }
+                },
+                {
+                  text: "Зеленый",
+                  bold: true,
+                  color: "green",
+                  onClick: function () {
+                    app.methods.togleColorScheme("green");
+                    app.toast
+                        .create({
+                          text: "Цветовая схема: " + "Зеленая",
+                          closeTimeout: 2000
+                        })
+                        .open();
+                  }
+                },
+                {
+                  text: "Серый",
+                  bold: true,
+                  color: "gray",
+                  onClick: function () {
+                    app.methods.togleColorScheme("gray");
+                    app.toast
+                        .create({
+                          text: "Цветовая схема: " + "Серая",
+                          closeTimeout: 2000
+                        })
+                        .open();
+                  }
+                }
+              ]
+            })
+            .open(function () {
+              this.$root.logger.set("App: Color scheme changed");
+            });
+      },
+      swipeToBack: function () {
+        let stbt = this.$el.find('[data-name="swipe-to-back-togle"]');
+        DB.set("settings", "swipe_to_back", stbt[0].checked);
+        app.methods.reloadApp();
+      },
+      checkTheme: function () {
+        let theme = DB.get("settings", "theme");
+        this.$el.find('[data-theme="' + theme + '"]').addClass("button-active");
+      },
+      checkNightMode: function () {
+        let nm = DB.get("settings", "night_mode");
+        if (nm) {
+          this.$el.find('[data-name="night-mode-togle"]').prop("checked", true);
+        } else {
+          this.$el
+              .find('[data-name="night-mode-togle"]')
+              .prop("checked", false);
+        }
+      },
+      checkSwipeToBackMode: function () {
+        let ctb = DB.get("settings", "swipe_to_back");
+        if (ctb) {
+          this.$el
+              .find('[data-name="swipe-to-back-togle"]')
+              .prop("checked", true);
+        } else {
+          this.$el
+              .find('[data-name="swipe-to-back-togle"]')
+              .prop("checked", false);
+        }
+      },
+      checkFontSize: function () {
+        let fs = DB.get("settings", "font_size");
+        this.$el.find("#fontSizeValue").val(fs);
+      }
+    },
+    on: {
+      pageInit: function () {
+        // check theme and switch togle
+        this.checkTheme();
+        // night mode
+        this.checkNightMode();
+        // night mode timetable
+        this.checkNightModeTimetable();
+        // swipe-to-back mode
+        this.checkSwipeToBackMode();
+        // font size
+        this.checkFontSize();
+      }
+    }
+  };
+</script>

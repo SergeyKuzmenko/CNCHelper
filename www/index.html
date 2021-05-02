@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <!--		<meta-->
+  <!--			content="default-src * 'self' 'unsafe-eval' 'unsafe-inline' data: gap: ws: 'unsafe-inline' content:"-->
+  <!--			http-equiv="Content-Security-Policy"-->
+  <!--		/>-->
+  <meta
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover"
+    name="viewport"
+  />
+
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="black" name="theme-color"/>
+  <meta content="telephone=yes" name="format-detection"/>
+  <meta content="no" name="msapplication-tap-highlight"/>
+  <title>CNCHelper</title>
+
+  <script src="js/db.js"></script>
+  <script src="js/api.js"></script>
+
+  <link href="css/framework7.css" rel="stylesheet"/>
+  <link href="css/framework7-icons.css" rel="stylesheet"/>
+  <link href="css/icons.css" rel="stylesheet"/>
+  <link href="css/app.css" rel="stylesheet"/>
+  <script>
+    DB.init();
+  </script>
+</head>
+<body onload="init()">
+<div id="app">
+  <div class="statusbar"></div>
+  <div class="view view-main">
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner sliding">
+          <div class="title sliding">ЧПУ-Помощник</div>
+          <div class="right">
+            <a class="link" href="/settings/">
+              <i class="f7-icons">gear_alt</i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="page-content">
+        <!--Cards-->
+        <div class="card card-expandable card-programming">
+          <div class="card-content">
+            <div
+              style="background: url(./img/programming.jpg) no-repeat center bottom; background-size: cover; height: 150px"
+            ></div>
+            <a
+              class="link card-close card-opened-fade-in color-white"
+              href="#"
+              style="position: absolute; right: 15px; top: 15px"
+            >
+              <i class="icon f7-icons">multiply_circle</i>
+            </a>
+            <div class="card-header display-block" style="height: 50px">
+              Программирование
+            </div>
+            <div class="card-content-padding">
+              <div class="list links-list">
+                <ul>
+                  <li>
+                    <a class="panel-close" href="/pr/fanuc/">
+                      <div class="item-media">
+                        <img
+                          src="img/brands/logo/fanuc_logo_small.jpg"
+                          width="40"
+                        />
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Fanuc</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/pr/haas/">
+                      <div class="item-media">
+                        <img
+                          src="img/brands/logo/haas_logo_small.jpg"
+                          width="40"
+                        />
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">HAAS</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/pr/sinumerik/">
+                      <div class="item-media">
+                        <img
+                          src="img/brands/logo/simens_logo_small.jpg"
+                          width="40"
+                        />
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Sinumerik</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-expandable card-messages">
+          <div class="card-content">
+            <div
+              style="background: url(./img/alarms.jpg) no-repeat center bottom; background-size: cover; height: 150px"
+            ></div>
+            <a
+              class="link card-close card-opened-fade-in color-white"
+              href="#"
+              style="position: absolute; right: 15px; top: 15px"
+            >
+              <i class="icon f7-icons">multiply_circle</i>
+            </a>
+            <div class="card-header display-block" style="height: 50px">
+              Сообщения станков
+            </div>
+            <div class="card-content-padding">
+              <div class="list links-list">
+                <ul>
+                  <li>
+                    <a class="panel-close" href="/msg/fanuc/">
+                      <div class="item-media">
+                        <img src="img/alert.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">
+                          Сообщения Doosan
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-expandable card-eskd">
+          <div class="card-content">
+            <div
+              style="background: url(./img/eskd.jpg) no-repeat center bottom; background-size: cover; height: 150px"
+            ></div>
+            <a
+              class="link card-close card-opened-fade-in color-white"
+              href="#"
+              style="position: absolute; right: 15px; top: 15px"
+            >
+              <i class="icon f7-icons">multiply_circle</i>
+            </a>
+            <div class="card-header display-block" style="height: 50px">
+              ЕСКД
+            </div>
+            <div class="card-content-padding">
+              <div class="list links-list">
+                <ul>
+                  <li>
+                    <a class="panel-close" href="/surface/">
+                      <div class="item-media">
+                        <img src="img/surface/surface.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">
+                          Допуски формы и расположения поверхностей
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/quality/">
+                      <div class="item-media">
+                        <img src="img/articles/quality.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">
+                          Шероховатость поверхности
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/kinds/">
+                      <div class="item-media">
+                        <img src="img/articles/kinds.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Расположение видов на чертеже</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="#/formats">
+                      <div class="item-media">
+                        <img src="img/img-icon.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Форматы чертежей</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="#/kinds">
+                      <div class="item-media">
+                        <img src="img/img-icon.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Виды на чертежах</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="#/scales">
+                      <div class="item-media">
+                        <img src="img/img-icon.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Масштабы чертежей</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="#/specification">
+                      <div class="item-media">
+                        <img src="img/img-icon.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Спецификация к чертежу</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-expandable card-educations">
+          <div class="card-content">
+            <div
+              style="background: url(./img/education.jpg) no-repeat center bottom; background-size: cover; height: 150px"
+            ></div>
+            <a
+              class="link card-close card-opened-fade-in color-white"
+              href="#"
+              style="position: absolute; right: 15px; top: 15px"
+            >
+              <i class="icon f7-icons">multiply_circle</i>
+            </a>
+            <div class="card-header display-block" style="height: 50px">
+              Образование
+            </div>
+            <div class="card-content-padding">
+              <div class="list links-list">
+                <ul>
+                  <li>
+                    <a class="panel-close" href="/pr/gcodes/">
+                      <div class="item-media">
+                        <img src="img/G.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">G-коды</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/pr/mcodes/">
+                      <div class="item-media">
+                        <img src="img/M.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">M-коды</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/education/">
+                      <div class="item-media">
+                        <img src="img/education.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">
+                          Основы фрезерования на станках с ЧПУ
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/basing/">
+                      <div class="item-media">
+                        <img src="img/basing/basing.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Базирование</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-expandable card-others">
+          <div class="card-content">
+            <div
+              style="background: url(./img/cutting_modes.jpg) no-repeat center bottom; background-size: cover; height: 150px"
+            ></div>
+            <a
+              class="link card-close card-opened-fade-in color-black"
+              href="#"
+              style="position: absolute; right: 15px; top: 15px"
+            >
+              <i class="icon f7-icons">multiply_circle</i>
+            </a>
+            <div class="card-header display-block" style="height: 50px">
+              Расчеты
+            </div>
+            <div class="card-content-padding">
+              <div class="list links-list">
+                <ul>
+                  <li>
+                    <a class="panel-close" href="/calc/">
+                      <div class="item-media">
+                        <img src="img/calc.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Расчет режимов резания</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="panel-close" href="/calc/roughness_turn/">
+                      <div class="item-media">
+                        <img src="img/ra.png" width="40"/>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title">Расчет шероховатости при точении</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Cards-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cordova -->
+<script src="cordova.js"></script>
+<!-- Include require js-files -->
+<script src="js/dom7.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/framework7.js"></script>
+<script src="js/sh_main.js"></script>
+<script src="js/sh_gcode.js"></script>
+<script src="js/jquery.basictable.min.js"></script>
+<!-- Include routes -->
+<script src="js/routes.js"></script>
+<!-- pr: sinumerik -->
+<script src="data/pr/sinumerik/siemens-sinumerik-milling.js"></script>
+<!-- pr: fanuc -->
+<script src="data/pr/fanuc/fanuc-turning-g.js"></script>
+<script src="data/pr/fanuc/fanuc-turning-m.js"></script>
+<script src="data/pr/fanuc/fanuc-milling-g.js"></script>
+<script src="data/pr/fanuc/fanuc-milling-m.js"></script>
+<!-- pr: haas -->
+<script src="data/pr/haas/haas-turning-g.js"></script>
+<script src="data/pr/haas/haas-turning-m.js"></script>
+<script src="data/pr/haas/haas-milling-g.js"></script>
+<script src="data/pr/haas/haas-milling-m.js"></script>
+<!-- Main js-file -->
+<script src="js/app.js"></script>
+<script src="js/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "app": {
+    "version": 1,
+    "db_version": 1
+  },
+  "device": {},
+  "debug": {
+    "debug": true,
+    "logger": true
+  },
+  "settings": {
+    "name": "CNCHelper",
+    "font_size": 100,
+    "theme": "ios",
+    "night_mode": false,
+    "night_mode_timetable": false,
+    "night_mode_timetable_start": "22:00",
+    "night_mode_timetable_end": "06:00",
+    "swipe_to_back": true,
+    "color_scheme": "blue"
+  },
+  "api": {
+    "url": "http://api/cnchelper/v1/"
+  }
+}

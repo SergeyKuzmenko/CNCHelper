@@ -1,0 +1,108 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only"></span>
+        </a>
+      </div>
+      <div class="title">Токарный цикл G70</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Описание</div>
+    <div class="block block-strong">
+      <p>
+        G70 – это цикл дополняющий циклы G71/G72/G73. Он позволяет произвести
+        чистовую обработку контура, после применения цикла черновой обработки.
+        Как самостоятельный цикл использовать его нецелесообразно.
+      </p>
+    </div>
+
+    <div class="block-title">Достоинства</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Позволяет проточить контур любой сложности.</li>
+        <li>
+          Можно запрограммировать подачу и обороты отдельно на чистовой проход.
+        </li>
+        <li>Программирование чистового прохода за одну строчку.</li>
+      </ul>
+    </div>
+
+    <div class="block-title">Недостатки</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Не имеет смысла как самостоятельный цикл.</li>
+        <li>Необходимо нумеровать строки кода, которые описывают контур.</li>
+      </ul>
+    </div>
+
+    <div class="block-title">Пример программы</div>
+    <div class="block block-strong">
+      <div class="block-header">Пример №1</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-70.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+
+      <div class="block-header">Пример №2</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-70-1.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <pre class="sh_gcode">
+O0004
+G00 X200 Z10 M3 S800
+G71 U2 R1 F200
+G71 P80 Q120 U0.5 W0.2
+N80 G00 X40 S1200
+G01 Z-30 F100
+X60 W-30
+W-20
+N120 X100 W-10
+G70 P80 Q120
+M30</pre
+      >
+
+      <div class="block-header">Пример №3</div>
+      <p>Пример программы черновой и чистовой обработки</p>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-70-2.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <pre class="sh_gcode">
+N10 T1 G97 S800 M03
+N20 G00 X45 Z2 G42
+N30 G71 U2 R1
+N40 G71 P50 Q120 U0.25 W0.1 F0.25
+N50 G00 X19.8
+N60 G01 X23.8 Z-2 F0.2
+N70 G01 Z-25
+N80 G01 X28.07
+N90 G01 X34 Z-33
+N100 G01 Z-48
+N110 G01 X42
+N120 G01 Z-58
+N130 G00 X100 Z100
+N140 G92 S1200
+N150 T3 G96 S150 M03
+N160 G00 X45 Z3
+N170 G70 P50 Q120
+N180 G00 X100 Z100
+N190 M30
+</pre
+      >
+    </div>
+  </div>
+</div>

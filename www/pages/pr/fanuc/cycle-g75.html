@@ -1,0 +1,144 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only"></span>
+        </a>
+      </div>
+      <div class="title">Токарный цикл G75</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Описание</div>
+    <div class="block block-strong">
+      <p>
+        G75 – это цикл для вытачивания канавок. Позволяет запрограммировать
+        прямоугольную канавку произвольного размера.
+      </p>
+    </div>
+
+    <div class="block-title">Достоинства</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Позволяет быстро запрограммировать канавку заданных размеров.</li>
+        <li>Улучшает процесс вывода стружки из канавки.</li>
+      </ul>
+    </div>
+
+    <div class="block-title">Недостатки</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Нельзя задавать скорость подачи на отдельные проходы.</li>
+        <li>Расстояние между проходами фиксированное для всего цикла.</li>
+        <li>Нет чистового прохода.</li>
+        <li>
+          Необходимо учитывать ширину пластины при программировании канавки.
+        </li>
+      </ul>
+    </div>
+
+    <div class="block-title">Программирование</div>
+    <div class="block block-strong">
+      <pre class="sh_gcode">
+G75 R...
+G75 X... Z... P... Q... R... F...
+</pre
+      >
+    </div>
+
+    <div class="block-title">Параметры</div>
+    <div class="block block-strong">
+      <div class="block-header">Первая строка</div>
+      <p>
+        <b>R (e)</b> - Величина отхода (надлома стружки) Это значение является модальным и не
+        изменяется, пока не будет задано другое значение.
+      </p>
+      <div class="block-header">Вторая строка</div>
+      <p>
+        <b>X</b> - Координата оси X на плоскости (ось X для плоскости ZX) в
+        точке B.
+      </p>
+      <p>
+        <b>Z</b> - Координата оси Z на плоскости (ось Z для плоскости ZX) в
+        точке C.
+      </p>
+      <p>
+        <b>P (∆i)</b> - Глубина резания в направлении оси X на плоскости (ось X
+        для плоскости ZX). Задается в мкм.
+      </p>
+      <p>
+        <b>Q (∆k)</b> - Глубина резания в направлении оси Z на плоскости (ось Z
+        для плоскости ZX). Задается в мкм.
+      </p>
+      <p>
+        <b>R (∆d)</b> - Величина отвода инструмента при проходе на конечную
+        точку.
+      </p>
+      <p><b>F</b> - Скорость подачи.</p>
+    </div>
+
+    <div class="block-title">Схема обработки</div>
+    <div class="block block-strong">
+      <div class="block">
+        <p>
+          <img
+            src="./img/pr/fanuc-img/cycle-g75.png"
+            class="responsive"
+            onclick="app.methods.openPhoto(this.src, 'Цикл сверления по наружному диаметру/внутреннему диаметру')"
+          />
+        </p>
+        <p class="caption-text">
+          Цикл сверления по наружному диаметру/внутреннему диаметру
+        </p>
+      </div>
+    </div>
+    <div class="block-title">Пояснение</div>
+    <div class="block block-strong">
+      <p>
+        Повторяется циклическая операция резания по ∆i и возврата по e. Когда
+        резание достигает точки B, инструмент отводится на ∆d. Затем инструмент
+        возвращается на скорости ускоренного перемещения, перемещается в
+        направлении точки C по ∆k и снова выполняет резание.
+      </p>
+      <p>
+        Как G74, так и G75 используются для точения канавок и сверления, и
+        позволяют автоматический отвод инструмента. Рассмотрим следующие четыре
+        симметричные схемы.
+      </p>
+    </div>
+
+    <div class="block-title">Пример программы</div>
+    <div class="block block-strong">
+      <div class="block-header">Пример №1</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-75.png"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <div class="block-header">Пример №2</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-75-2.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <pre class="sh_gcode">
+N10 T0202
+N20 G92 S500 M42
+N30 G97 S400 M03
+N40 G00 X110 Z0 M08
+N50 G01 Z-22 F0.5
+N60 G75 R1
+N70 G75 X90 Z-60 P2000 Q3000 R0 F0.1
+N80 G00 X120 Z100
+N90 M30
+</pre
+      >
+    </div>
+  </div>
+</div>

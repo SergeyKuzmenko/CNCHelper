@@ -1,0 +1,225 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back" href="/">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">О приложении</div>
+      </div>
+    </div>
+    <div class="toolbar tabbar toolbar-bottom">
+      <div class="toolbar-inner">
+        <a href="#about" class="tab-link tab-link-active">Описание</a>
+        <a href="#changelog" class="tab-link">Изменения</a>
+        <a href="#contacts" class="tab-link">Контакты</a>
+      </div>
+    </div>
+    <div class="tabs-animated-wrap">
+      <div class="tabs">
+        <div id="about" class="page-content tab tab-active">
+          <div class="block-title">Описание</div>
+          <div class="block block-strong">
+            <img
+              data-src="./img/hi.jpg"
+              class="lazy lazy-fade-in image-lazy responsive"
+             alt="hi"/>
+          </div>
+          <div class="block block-strong">
+            <p>Hello! I'm Developer this app.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
+              commodi culpa cupiditate distinctio ex libero nulla sapiente vel
+              veniam voluptas.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. At aut
+              beatae, cumque odio perferendis porro possimus ratione veritatis
+              vitae voluptatem. Est, eum quibusdam! Adipisci animi eligendi esse
+              iusto molestiae nostrum recusandae tenetur? Beatae dolorem expedita
+              facilis incidunt ipsam tempora? Consectetur, officiis velit. Alias
+              assumenda eos hic mollitia nemo numquam sunt.
+            </p>
+            <p>
+              Asperiores fugit libero nesciunt, possimus quod ratione rerum! Alias
+              aliquam amet aperiam, asperiores atque, delectus earum eligendi
+              error facere illum impedit ipsam nobis odio quia quo, quos rerum sed
+              sint! Dignissimos est excepturi expedita ipsa numquam obcaecati quia
+              ratione ut veniam voluptate! Aliquid est eum, quas quia quis tempore
+              voluptatibus.
+            </p>
+            <p>
+              Beatae cupiditate deleniti dicta dolorum ea est incidunt laudantium
+              nisi non odit, pariatur possimus provident quaerat quam qui, soluta,
+              suscipit. Itaque, obcaecati vero! Dignissimos, error optio?
+              Accusantium atque consectetur consequatur ea eius et facere facilis
+              iure labore nemo nisi, quasi, repellat repellendus reprehenderit
+              sapiente sequi unde voluptate. Impedit ipsam, nobis.
+            </p>
+          </div>
+        </div>
+        <div id="changelog" class="page-content tab">
+          <div class="block-title">История изменений приложения</div>
+          <div class="block block-strong">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-item-date">
+                  <small>v</small>
+                  1.2.0
+                </div>
+                <div class="timeline-item-divider"></div>
+                <div class="timeline-item-content card">
+                  <div class="card-header">15.04.2019</div>
+                  <div class="card-content card-content-padding">
+                    Added:
+                    <ul>
+                      <li>Bugs</li>
+                      <li>And Errors</li>
+                      <li>More bugs</li>
+                    </ul>
+                    Fixed:
+                    <ul>
+                      <li>Nothing. Lol</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-item-date">
+                  <small>v</small>
+                  1.1.0
+                </div>
+                <div class="timeline-item-divider"></div>
+                <div class="timeline-item-content card">
+                  <div class="card-header">30.02.2019</div>
+                  <div class="card-content card-content-padding">
+                    Description new version
+                    <ul>
+                      <li>Lorem ipsum dolor.</li>
+                      <li>Lorem ipsum dolor.</li>
+                      <li>Lorem ipsum dolor.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-item-date">
+                  <small>v</small>
+                  1.0.0
+                </div>
+                <div class="timeline-item-divider"></div>
+                <div class="timeline-item-content card">
+                  <div class="card-header">31.12.2018</div>
+                  <div class="card-content card-content-padding">
+                    Release
+                    <ul>
+                      <li>Lorem ipsum dolor.</li>
+                      <li>Lorem ipsum dolor.</li>
+                      <li>Lorem ipsum dolor.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contacts" class="page-content tab">
+          <div class="block-title">Форма обратной связи</div>
+          <div class="block block-strong">
+            <form enctype="application/x-www-form-urlencoded" class="formFeedBack" onsubmit="return false;">
+              <div class="list">
+                <ul>
+                  <li class="item-content item-input item-input-outline">
+                    <div class="item-inner">
+                      <div class="item-title item-label">Имя</div>
+                      <div class="item-input-wrap">
+                        <label>
+                          <input type="text" name="name" required validate data-validate-on-blur="true">
+                        </label>
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                    <div class="item-inner">
+                      <div class="item-title item-label">E-mail</div>
+                      <div class="item-input-wrap">
+                        <input type="email" name="email" required validate data-validate-on-blur="true">
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                    <div class="item-inner">
+                      <div class="item-title item-label">Тема обращения</div>
+                      <div class="item-input-wrap input-dropdown-wrap">
+                        <select name="subject" required validate>
+                          <option selected disabled hidden>Выбрать</option>
+                          <option value="1">Функционал</option>
+                          <option value="2">Предложение</option>
+                          <option value="3">Исправление</option>
+                          <option value="4">Сотрудничество</option>
+                          <option value="5">Помощь</option>
+                          <option value="6">Другое</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input item-input-outline">
+                    <div class="item-inner">
+                      <div class="item-title item-label">Сообщение</div>
+                      <div class="item-input-wrap">
+                    <textarea placeholder="Введите текст..." name="text" minlength="10" required validate
+                              data-error-message="Не очень информативное сообщение..."></textarea>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <label class="item-checkbox item-content">
+                      <input type="checkbox" name="debugData" value="1"/>
+                      <i class="icon icon-checkbox"></i>
+                      <div class="item-inner">
+                        <div class="item-title-row">
+                          <div class="item-title">Прикрепить отладочные данные</div>
+                        </div>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+                <div class="block">
+                  <div class="row">
+                    <button class="col button button-fill" @click="sendMessage()">Отправить</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function() {
+      return {
+
+      };
+    },
+    methods: {
+      sendMessage() {
+        let form = new FormData($$('.formFeedBack'))
+        console.log(form);
+      },
+
+    },
+    on: {
+
+    }
+  };
+</script>

@@ -1,0 +1,39 @@
+<template>
+  <div class="page" data-name="mcode">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">{{mcode.code}}</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block-title">Описание</div>
+      <div class="block block-strong">
+        {{mcode.name}}
+      </div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function() {
+      var mcodeId = this.$route.params.id;
+      console.log(mcodeId);
+      var currentMcode;
+      FANUC_MILLING_M.forEach(function(mcode) {
+        if (mcode.code === mcodeId) {
+          currentMcode = mcode;
+        }
+      });
+      return {
+        mcode: currentMcode
+      };
+    }
+  };
+</script>

@@ -1,0 +1,177 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only"></span>
+        </a>
+      </div>
+      <div class="title">Токарный цикл G73</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">Описание</div>
+    <div class="block block-strong">
+      <p>
+        G73 – это цикл контурной обработки. Цикл разработан для обточки деталей,
+        которые имеют равномерный припуск материала по всему периметру
+        обработки. Обычно под этот тип обработки попадают литые детали.
+      </p>
+    </div>
+
+    <div class="block-title">Достоинства</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Позволяет обработать контур любой сложности.</li>
+        <li>Позволяет за короткое время обработать литую заготовку.</li>
+        <li>
+          Количество проходов в цикле рассчитывается через параметр величины
+          съёма материала, то есть не нужно задавать каждый проход отдельно.
+        </li>
+        <li>
+          Дополняется циклом G70, который позволяет сделать чистовой проход.
+        </li>
+        <li>
+          Обтачиваемый контур программируется отдельно от цикла, и прописывается
+          как обычная траектория движения инструмента – удобно в редактировании.
+        </li>
+        <li>Можно запрограммировать припуски, причём отдельно по оси X и Z.</li>
+      </ul>
+    </div>
+
+    <div class="block-title">Недостатки</div>
+    <div class="block block-strong">
+      <ul>
+        <li>Нельзя задавать скорость подачи на отдельные проходы.</li>
+        <li>Расстояние между проходами фиксированное для всего цикла.</li>
+        <li>Необходимо нумеровать строки кода, которые описывают контур.</li>
+      </ul>
+    </div>
+
+    <div class="block-title">Программирование</div>
+    <div class="block block-strong">
+      <pre class="sh_gcode">
+G73 U W R
+G73 P Q U W
+</pre
+      >
+    </div>
+
+    <div class="block-title">Параметры</div>
+    <div class="block block-strong">
+      <div class="block-header">Первая строка</div>
+      <p>
+        <b>U</b> - Глубина резания для оси Х. Или, количество материала, которое
+        будет срезано по оси X.
+      </p>
+      <p>
+        <b>W</b> - Глубина резания для оси Z. Или, количество материала, которое
+        будет срезано по оси Z.
+      </p>
+      <p><b>R</b> - Количество проходов</p>
+
+      <div class="block-header">Вторая строка</div>
+      <p><b>P</b> - Номер начального блока контура.</p>
+      <p><b>Q</b> - Конечный номер блока контура.</p>
+      <p>
+        <b>U</b> - Припуск на чистовую обработку по оси X (ось X для плоскости
+        XZ)
+      </p>
+      <p>
+        <b>W</b> - Припуск на чистовую обработку по оси Z (ось Z для плоскости
+        XZ)
+      </p>
+    </div>
+
+    <div class="block-title">Схема обработки</div>
+    <div class="block block-strong">
+      <div class="block">
+        <p>
+          <img
+            src="./img/pr/fanuc-img/cycle-73-1.jpg"
+            class="responsive"
+            onclick="app.methods.openPhoto(this.src)"
+          />
+        </p>
+      </div>
+    </div>
+
+    <div class="block-title">Пример программы</div>
+    <div class="block block-strong">
+      <div class="block-header">Пример №1</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-73.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <div class="block-header">Пример №2</div>
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-73-2.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <pre class="sh_gcode">
+N10 G50 S2000 T0300
+G96 S200 M03
+G00 X35.0 Z5.0 T0303
+Z0
+G01 X-1.6 F0.2
+G00 X70.0 Z10.0
+G73 U3.0 W2.0 R2
+G73 P12 Q16 U0.5 W0.1 F0.25
+N12 G00 G42 X20.0 Z2.0
+G01 Z-10.0 F0.15
+G02 X40.0 Z-20.0 R10.0
+G01 Z-30.0
+X60.0 Z-50.0
+N16 G40 U1.0
+G70 P12 Q16
+G00 X200.0 Z200.0 T0300
+M30
+</pre
+      >
+      <div class="block-header">Пример №3</div>
+
+      <p>
+        <img
+          src="./img/pr/fanuc-img/cycle-73-3.jpg"
+          class="responsive"
+          onclick="app.methods.openPhoto(this.src)"
+        />
+      </p>
+      <pre class="sh_gcode">
+N10 T0101
+N20 G97 S1000 M03
+N30 G00 X44 Z0
+N40 G01 X-1 F0.1
+N50 G01 Z1
+N60 G00 X40 Z1
+N70 G73 U7 W0 R7
+N80 G73 P90 Q180 U0.6 W0.3 F0.2
+N90 G00 X27.8 Z1 S1200
+N100 G01 Z0 F0.15
+N110 G01 X29.8 Z-1
+N120 G01 Z-10
+N130 G01 X26 Z-12
+N140 G01 Z-22.776
+N150 G01 G02 X30.775 Z-28.041 R7
+N160 G01 X38 Z-48
+N170 G01 Z-55
+N180 G01 X42
+N190 G00 X200 Z100
+N200 T0303
+N210 G97 S1200 M03
+N220 G00 X42 Z1
+N230 G70 P90 Q180
+N240 G00 X200 Z200
+N250 M30
+</pre
+      >
+    </div>
+  </div>
+</div>

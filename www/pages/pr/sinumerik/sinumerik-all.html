@@ -1,0 +1,92 @@
+<template>
+  <div class="page" data-name="sinumerik-all">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="/" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Назад</span>
+          </a>
+        </div>
+        <div class="title">Sinumerik</div>
+      </div>
+    </div>
+    <div class="searchbar-backdrop"></div>
+    <form
+      class="searchbar searchbar-init"
+      data-search-container=".list"
+      data-search-item="li"
+      data-search-in=".item-title"
+    >
+      <div class="searchbar-inner">
+        <div class="searchbar-input-wrap">
+          <input type="search" placeholder="Поиск..."/>
+          <i class="searchbar-icon"></i>
+          <span class="input-clear-button"></span>
+        </div>
+        <span class="searchbar-disable-button">Отмена</span>
+      </div>
+    </form>
+    <div class="page-content">
+      <div class="block searchbar-not-found">
+        <div class="item-inner">
+          <div class="item-title">
+                <span style="font-weight:bold"
+                >Ничего не найдено</span
+                >
+          </div>
+        </div>
+      </div>
+      <div class="list virtual-list media-list searchbar-found"></div>
+    </div>
+  </div>
+</template>
+<!--suppress JSAnnotator -->
+<script>
+  return {
+    data: function () {
+      return {
+        url: "../data/pr/sinumerik/sinumerik.json",
+        SinumerikData: []
+      };
+    },
+    methods: {
+      renderData: function () {
+        let self = this;
+        let app = self.$app;
+        let items = [];
+        app.request.json("./data/pr/sinumerik/sinumerik.json", function (jsonData) {
+          items.push(jsonData);
+          app.virtualList.create({
+            el: ".virtual-list",
+            items: items[0],
+            searchAll: function (query, items) {
+              var found = [];
+              for (var i = 0; i < items[0].length; i++) {
+                if (items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+              }
+              return found;
+            },
+            itemTemplate:
+              "<li>" +
+                '<a href="/pr/sinumerik/all/{{title}}" class="item-link item-content">' +
+                '<div class="item-inner">' +
+                  '<div class="item-title-row">' +
+                    '<div class="item-title">{{title}}</div>' +
+                  "</div>" +
+                  '<div class="item-subtitle">{{description}}</div>' +
+                "</div>" +
+                "</a>" +
+              "</li>"
+          });
+        });
+      },
+    },
+    on: {
+      pageInit: function () {
+        this.renderData()
+      }
+    }
+  };
+</script>
+<style></style>
